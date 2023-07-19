@@ -13,3 +13,7 @@ This needs to be automated so that the infrastructure can be discarded as soon a
 ### Solution.
 
 I  designed an Architecture for Udagram using Lucid Chart. This architecture will be implementented in two categories i.e Network Infrastructure then Server Instances
+
+![UdagramArchitecture](https://github.com/ViNguyenThuyTuong/udacity-devops-project2/assets/97575081/f61e55ab-b55c-4a81-8e9a-ef216d89c8fc)
+
+
