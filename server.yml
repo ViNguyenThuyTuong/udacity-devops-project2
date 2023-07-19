@@ -62,7 +62,7 @@ Resources:
       KeyName: devops-keypair2
       SecurityGroups:
       - Ref: WebServerSecGroup
-      InstanceType: t2.micro
+      InstanceType: t3.small
       BlockDeviceMappings:
       - DeviceName: "/devops2/sdk"
         Ebs:
