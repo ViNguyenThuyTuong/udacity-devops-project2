@@ -9,6 +9,30 @@ Parameters:
         Type: String
 
 Resources:
+
+  EC2ReadOnlyS3Role:
+      Type: AWS::IAM::Role
+      Properties:
+        ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service:
+                  - ec2.amazonaws.com
+              Action:
+                - 'sts:AssumeRole'
+        Path: "/"
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: "/"
+      Roles:
+        - !Ref EC2ReadOnlyS3Role
+
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -55,7 +79,12 @@ Resources:
           #!/bin/bash
           sudo apt-get update -y
           sudo apt-get install apache2 -y
-          sudo systemctl start apache2.service          
+          sudo apt-get install unzip awscli -y
+          sudo systemctl start apache2.service
+          cd /var/www/html
+          sudo aws s3 cp s3://devops2-bucket/udagram.zip
+          sudo unzip -o udagram.zip
+          sudo systemctl start apache2.service   
       # ToDo: AMI ID of Ubuntu Linux machine. Too get one, try creating a VM from the web console. 
       ImageId: ami-053b0d53c279acc90
       # ToDo: Change the key-pair name, as applicable to you. 
@@ -64,7 +93,7 @@ Resources:
       - Ref: WebServerSecGroup
       InstanceType: t3.small
       BlockDeviceMappings:
-      - DeviceName: "/devops2/sdk"
+      - DeviceName: "/dev/sdk"
         Ebs:
           VolumeSize: '10'
   WebAppGroup:

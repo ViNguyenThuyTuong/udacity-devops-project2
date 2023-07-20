@@ -16,4 +16,7 @@ I  designed an Architecture for Udagram using Lucid Chart. This architecture wil
 
 ![UdagramArchitecture](https://github.com/ViNguyenThuyTuong/udacity-devops-project2/assets/97575081/f61e55ab-b55c-4a81-8e9a-ef216d89c8fc)
 
+Click link below to access web app.
+http://devop-webap-mxc0ddsdrgol-454812608.us-east-1.elb.amazonaws.com/
+
 
